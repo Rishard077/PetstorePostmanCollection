@@ -1,5 +1,3 @@
-# Automated Petstore API using Newman CLI
-
 name: Automated Petstore API using Newman CLI
 on: workflow_dispatch
 
@@ -8,6 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Clear Cache
+        run: |
+          rm -f "Petstore_API_postman.json"
+          rm -f "Petstore.postman_environment.json"
       - uses: actions/checkout@v3
       - name: Create dir
         run: | 
@@ -18,9 +20,10 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Install newmen
-        run: npm install -g newman
-            npm install -g newman-reporter-htmlextra
+      - name: Install newman
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
 
       - name: Run Test
         run: newman run "Petstore.postman_collection.json" -e "Petstore.postman_environment.json" -r cli,htmextra --reporter-htmlextra-export testArtifacts/htmlreport.html
