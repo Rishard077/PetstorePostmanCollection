@@ -23,7 +23,7 @@ jobs:
             npm install -g newman-reporter-htmlextra
 
       - name: Run Test
-        run: newman run Petstore_API_postman.json -e Petstore.postman_environment.json -r cli,htmextra --reporter-htmlextra-export testArtifacts/htmlreport.html
+        run: newman run "Petstore_API_postman.json" -e "Petstore.postman_environment.json" -r cli,htmextra --reporter-htmlextra-export testArtifacts/htmlreport.html
  
       - name: Test Output
         uses: actions/upload-artifact@v3
